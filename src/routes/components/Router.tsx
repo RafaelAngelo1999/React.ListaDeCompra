@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '../../pages/Home/views/Home';
-import { Editar } from '../../pages/Home/components/Editar';
+import { Listagem } from '../../pages/Listagem';
+import { Manipular } from '../../pages/Editar';
 
 const Router: FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="products" element={<div>DASDAS ASDASDAS ASDASDASDAS</div>}></Route>
-      <Route path="products/:id" element={<Editar />} />
+      <Route path="/" element={<Listagem />} />
+      <Route path="products/add" element={<Manipular />} />
+      <Route path="products/edit/:idProduto" element={<Manipular />} />
     </Routes>
   );
 };

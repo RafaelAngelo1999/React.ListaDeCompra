@@ -1,27 +1,19 @@
 export interface IItem {
-  id: number;
-  nome: string;
-  categoria: string;
-  urgencia: boolean;
-  quantidade: number;
-  marcado: boolean;
+  key: string;
+  value: string;
 }
 
-export const LISTA: IItem[] = [
+export const categorias: IItem[] = [
   {
-    id: 1,
-    nome: 'Abacaxi',
-    categoria: 'Fruta',
-    urgencia: true,
-    quantidade: 2,
-    marcado: false,
+    key: 'Comida',
+    value: 'Comida',
   },
   {
-    id: 2,
-    nome: 'Detergente',
-    categoria: 'Limpeza',
-    urgencia: false,
-    quantidade: 3,
-    marcado: true,
+    key: 'Limpeza',
+    value: 'Limpeza',
+  },
+  {
+    key: 'Guloseimas',
+    value: 'Guloseimas',
   },
 ];

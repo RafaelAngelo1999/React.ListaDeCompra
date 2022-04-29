@@ -1,8 +1,11 @@
 import { Grid, Typography, Button } from '@mui/material';
 import React, { FC } from 'react';
 import { Plus } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Grid mt={5} px={2} container direction="row" justifyContent="space-around" alignItems="center">
@@ -12,7 +15,7 @@ const Header: FC = () => {
           </Typography>
         </Grid>
         <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
-          <Button variant="outlined" endIcon={<Plus />}>
+          <Button onClick={() => navigate('products/add')} variant="outlined" endIcon={<Plus />}>
             Add Item
           </Button>
         </Grid>

@@ -1,18 +1,18 @@
-import { Home } from '../../pages/Home';
-import { Editar } from '../../pages/Home/components/Editar';
-import { Filtro } from '../../pages/Home/components/Listagem/Filtro';
+import { Manipular } from '../../pages/Editar';
+import { Listagem } from '../../pages/Listagem';
+import { Filtro } from '../../pages/Listagem/components/Filtro';
 import { Rotas as rotasEnum } from '../../shared/enum/Rotas';
 import { Rotas } from './IRotas';
 
 export const rotas: Rotas = {
   home: {
     pathRota: rotasEnum.HOME,
-    component: Home,
+    component: Listagem,
     nome: 'Home',
   },
   indefinida: {
     pathRota: rotasEnum.INDEFINIDA,
-    component: Home,
+    component: Listagem,
     nome: 'Indefinida',
   },
   teste: {
@@ -22,12 +22,12 @@ export const rotas: Rotas = {
   },
   sobre: {
     pathRota: rotasEnum.SOBRE,
-    component: Home,
+    component: Listagem,
     nome: 'Sobre',
   },
   editar: {
     pathRota: rotasEnum.EDITAR,
-    component: Editar,
+    component: Manipular,
     nome: 'Editar',
   },
 };

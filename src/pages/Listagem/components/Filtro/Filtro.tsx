@@ -1,11 +1,21 @@
-import { Grid, TextField, InputAdornment, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from '@mui/material';
 import React, { FC } from 'react';
 import { Search } from 'react-feather';
 
 const Filtro: FC = () => {
+  // TODO Ajustar Filtro
   const [age, setAge] = React.useState('');
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setAge(event.target.value);
   };
 
