@@ -13,7 +13,6 @@ import {
   atualizarProduto,
 } from '../../../../store/slices/ListaDeComprasSlice';
 
-import { toast } from 'react-toastify';
 import { categorias } from '../../../../shared/models/IItem';
 
 interface IFormularioProps {
@@ -41,19 +40,13 @@ const Formulario: FC<IFormularioProps> = ({ idProduto, isEdit }) => {
 
   // eslint-disable @typescript-eslint/no-explicit-any
   const editarOuCriarProduto = (data: Produto) => {
-    if (isEdit) {
-      dispatch(atualizarProduto(data));
-      toast.success('🦄 Atualizado com sucesso!');
-    } else {
-      dispatch(adicionarProduto(data));
-      toast.success('🦄 Criado com sucesso!');
-    }
+    if (isEdit) dispatch(atualizarProduto(data));
+    else dispatch(adicionarProduto(data));
     navigate('/');
   };
 
   const excluirProduto = () => {
     produtoAtual && dispatch(removerProduto(produtoAtual?.id));
-    toast.success('🦄 Excluido com sucesso!');
     navigate('/');
   };
 
@@ -127,6 +120,7 @@ const Formulario: FC<IFormularioProps> = ({ idProduto, isEdit }) => {
             defaultValue=""
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
+                InputProps={{ inputProps: { min: 0 } }}
                 type={'number'}
                 fullWidth
                 label="Quantidade"
@@ -138,6 +132,7 @@ const Formulario: FC<IFormularioProps> = ({ idProduto, isEdit }) => {
             )}
             rules={{
               required: 'Quantidade Obrigatoria',
+              pattern: { value: /^[+]?\d+([.]\d+)?$/, message: 'Apenas numeros positivos' },
             }}
           />
         </Grid>

@@ -7,14 +7,16 @@ import { useSelector } from 'react-redux';
 import { State } from '../../../store';
 
 const Listagem: FC = () => {
-  const listaDeComprasAtual = useSelector((state: State) => state.listaDeCompras.listaDeCompras);
+  const [listaDeCompras, setListaDeCompras] = React.useState(
+    useSelector((state: State) => state.listaDeCompras.listaDeCompras),
+  );
 
   return (
     <>
       <CssBaseline />
       <Header />
-      <Filtro />
-      <Lista lista={listaDeComprasAtual} />
+      <Filtro setListaDeCompras={(lista) => setListaDeCompras(lista)} />
+      <Lista lista={listaDeCompras} />
     </>
   );
 };

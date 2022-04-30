@@ -13,6 +13,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/styled-components": "^5.1.21",
     "@types/uuid": "^8.3.4",
     "axios": "^0.25.0",

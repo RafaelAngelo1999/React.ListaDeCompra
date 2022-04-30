@@ -1,23 +1,35 @@
-import {
-  Grid,
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from '@mui/material';
+import { Grid, TextField, InputAdornment } from '@mui/material';
+import debounce from 'lodash.debounce';
 import React, { FC } from 'react';
 import { Search } from 'react-feather';
+import { useSelector } from 'react-redux';
+import { State } from '../../../../store';
+import { Produto } from '../../../../store/slices/ListaDeComprasSlice';
 
-const Filtro: FC = () => {
-  // TODO Ajustar Filtro
-  const [age, setAge] = React.useState('');
+interface IFiltroProps {
+  setListaDeCompras: (lista: Produto[]) => void;
+}
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    setAge(event.target.value);
-  };
+const Filtro: FC<IFiltroProps> = ({ setListaDeCompras }) => {
+  const listaDeComprasAtual = useSelector((state: State) => state.listaDeCompras.listaDeCompras);
+  const [filtroAtual, setFiltroAtual] = React.useState('');
+
+  const deboucedFiltroLista = React.useMemo(() => {
+    return debounce((filtroLista) => {
+      setFiltroAtual(filtroLista);
+      setListaDeCompras(
+        listaDeComprasAtual.filter(
+          (produto) =>
+            produto.nome.toUpperCase().includes(filtroLista.toUpperCase()) ||
+            produto.categoria.toUpperCase().includes(filtroLista.toUpperCase()),
+        ),
+      );
+    }, 300);
+  }, [listaDeComprasAtual]);
+
+  React.useEffect(() => {
+    deboucedFiltroLista(filtroAtual);
+  }, [listaDeComprasAtual]);
 
   return (
     <Grid mt={5} direction="column" px={2} alignItems="end">
@@ -33,26 +45,8 @@ const Filtro: FC = () => {
           ),
         }}
         variant="filled"
+        onChange={(filtro) => deboucedFiltroLista(filtro.target.value)}
       />
-      <Grid container justifyContent="flex-end">
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-standard-label">Ordenar Por:</InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={age}
-            onChange={handleChange}
-            label="Age"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
     </Grid>
   );
 };

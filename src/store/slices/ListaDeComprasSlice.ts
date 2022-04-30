@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 interface ListaDeComprasState {
   listaDeCompras: Produto[];
@@ -15,10 +16,20 @@ export interface Produto {
 }
 
 const initialState: ListaDeComprasState = {
-  listaDeCompras: [
-    { id: '123123', nome: 'Nome', categoria: 'Comida', quantidade: 2, urgencia: true, finalizado: false },
-    { id: '321321', nome: 'NomeTeste', categoria: 'Limpeza', quantidade: 4, urgencia: false, finalizado: true },
+  listaDeCompras: JSON.parse(localStorage.getItem('listaProdutos') as unknown as string) || [
+    {
+      id: '123123',
+      nome: 'Nome',
+      categoria: 'Comida',
+      quantidade: 2,
+      urgencia: true,
+      finalizado: false,
+    },
   ],
+};
+
+const atualizarLocalStorage = (listaProdutos: Produto[]) => {
+  localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
 };
 
 export const ListaDeComprasSlice = createSlice({
@@ -28,14 +39,16 @@ export const ListaDeComprasSlice = createSlice({
     marcarFinalizado: (state, action: PayloadAction<{ id: string; finalizado: boolean }>) => {
       state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)].finalizado =
         action.payload.finalizado;
+      atualizarLocalStorage(state.listaDeCompras);
     },
     adicionarQuantidade: (state, action: PayloadAction<Produto>) => {
       state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)].quantidade =
-        state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)].quantidade +
-        1;
+        +state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)]
+          .quantidade + 1;
+      atualizarLocalStorage(state.listaDeCompras);
     },
     removerQuantidade: (state, action: PayloadAction<Produto>) => {
-      state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)].quantidade > 0
+      state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)].quantidade > 1
         ? (state.listaDeCompras[
             state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)
           ].quantidade =
@@ -49,14 +62,19 @@ export const ListaDeComprasSlice = createSlice({
               .indexOf(action.payload.id),
             1,
           );
+      atualizarLocalStorage(state.listaDeCompras);
     },
     adicionarProduto: (state, action: PayloadAction<Produto>) => {
       action.payload.id = uuidv4();
       state.listaDeCompras.push(action.payload);
+      atualizarLocalStorage(state.listaDeCompras);
+      toast.success('🦄 Adicionado com sucesso!');
     },
     atualizarProduto: (state, action: PayloadAction<Produto>) => {
       state.listaDeCompras[state.listaDeCompras.findIndex((produto) => produto.id === action.payload.id)] =
         action.payload;
+      atualizarLocalStorage(state.listaDeCompras);
+      toast.success('🦄 Atualizado com sucesso!');
     },
     removerProduto: (state, action: PayloadAction<string>) => {
       const index = state.listaDeCompras
@@ -65,6 +83,8 @@ export const ListaDeComprasSlice = createSlice({
         })
         .indexOf(action.payload);
       state.listaDeCompras.splice(index, 1);
+      atualizarLocalStorage(state.listaDeCompras);
+      toast.error('🦄 Removido com sucesso!');
     },
   },
 });

@@ -19,17 +19,17 @@ const Lista: FC<IListaProps> = ({ lista }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  return (
+  return lista.length ? (
     <>
       {Object.values(lista).map((item) => (
         <Grid key={item.id} mt={5} container direction="row" justifyContent="space-around" alignItems="center">
-          <Grid item xs={1}>
+          <Grid xs={1}>
             <Checkbox
               checked={item.finalizado}
               onChange={() => dispatch(marcarFinalizado({ id: item.id, finalizado: !item.finalizado }))}
             />
           </Grid>
-          <Grid item xs={7} pl={1}>
+          <Grid xs={7} pl={1}>
             <Grid direction="row" style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/edit/${item.id}`)}>
               <Typography
                 variant="h5"
@@ -45,10 +45,10 @@ const Lista: FC<IListaProps> = ({ lista }) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item xs={1}>
+          <Grid xs={1}>
             <Trash2 style={{ cursor: 'pointer' }} onClick={() => dispatch(removerProduto(item.id))} />
           </Grid>
-          <Grid item xs={3}>
+          <Grid xs={3}>
             <TextField
               id="outlined-start-adornment"
               disabled
@@ -76,6 +76,10 @@ const Lista: FC<IListaProps> = ({ lista }) => {
         </Grid>
       ))}
     </>
+  ) : (
+    <Typography style={{ marginTop: '50px', color: 'grey' }} align="center" variant="h3">
+      Lista vazia :(
+    </Typography>
   );
 };
 
