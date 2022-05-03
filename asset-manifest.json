@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/React.ListaDeCompra/static/css/main.039bf95e.css",
+    "main.js": "/React.ListaDeCompra/static/js/main.f2699bcf.js",
+    "index.html": "/React.ListaDeCompra/index.html",
+    "main.039bf95e.css.map": "/React.ListaDeCompra/static/css/main.039bf95e.css.map",
+    "main.f2699bcf.js.map": "/React.ListaDeCompra/static/js/main.f2699bcf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.039bf95e.css",
+    "static/js/main.f2699bcf.js"
+  ]
+}
