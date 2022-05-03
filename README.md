@@ -12,6 +12,8 @@ Com essas funcionalidades é possível que o usuário gerencie todas as suas pen
 
 ### Telas
 
+[PrototipoFigma](https://www.figma.com/file/0GtfYjJybBtJs0mNMXj88K/Untitled?node-id=0%3A1).
+
 - Na tela inicial, exibimos a lista de produtos cadastrados para a proxima compra do usuario. No header temos o total de produtos inseridos na lista e o botão de adicionar novo produto
 
 - Na tela de cadastrar um novo produto, é possível informar o nome, categoria, quantidade e a urgencia da compra.
