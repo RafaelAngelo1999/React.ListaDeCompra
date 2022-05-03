@@ -16,16 +16,7 @@ export interface Produto {
 }
 
 const initialState: ListaDeComprasState = {
-  listaDeCompras: JSON.parse(localStorage.getItem('listaProdutos') as unknown as string) || [
-    {
-      id: '123123',
-      nome: 'Nome',
-      categoria: 'Comida',
-      quantidade: 2,
-      urgencia: true,
-      finalizado: false,
-    },
-  ],
+  listaDeCompras: JSON.parse(localStorage.getItem('listaProdutos') as unknown as string) || [],
 };
 
 const atualizarLocalStorage = (listaProdutos: Produto[]) => {
