@@ -1,6 +1,6 @@
 # Lista de compras
 
-![](src/utils/readme/image/projeto.png)
+![](src/utils/readme/projeto.png)
 
 [ListaDeCompras](https://rafaelangelo1999.github.io/React.ListaDeCompra/) aplicativo para gerenciar lista de compras, onde é possível cadastrar itens por categorias já pré cadastradas e gerenciar esses ativos em tempo real, como por exemplo:
 
